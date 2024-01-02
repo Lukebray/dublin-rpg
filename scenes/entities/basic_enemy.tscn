@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://c356qio6dv8ir"]
+
+[ext_resource type="Script" path="res://scenes/entities/basic_enemy.gd" id="1_g8rui"]
+[ext_resource type="Texture2D" uid="uid://ddkm3ktvram8e" path="res://art/enemy.png" id="1_m6e35"]
+[ext_resource type="PackedScene" uid="uid://p4c321o2n7ho" path="res://scenes/components/random_stream_player_2d_component.tscn" id="2_sweey"]
+[ext_resource type="AudioStream" uid="uid://b5k48w2fx21gl" path="res://audio/junkie_enemy/junkie_get_out_of_my_way.wav" id="4_6k45u"]
+[ext_resource type="AudioStream" uid="uid://2lbqeq2yroml" path="res://audio/junkie_enemy/junkie_gimme_a_bag.wav" id="5_jk7yh"]
+[ext_resource type="AudioStream" uid="uid://dq3swpg2i72s4" path="res://audio/junkie_enemy/junkie_gimme_a_bag_now.wav" id="6_743hg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1j3vs"]
+size = Vector2(7, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpx4o"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_upumf"]
+radius = 25.0
+
+[node name="BasicEnemy" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 6
+motion_mode = 1
+script = ExtResource("1_g8rui")
+movement_speed = 20.0
+acceleration = 1.0
+
+[node name="RandomStreamPlayer2DComponent" parent="." instance=ExtResource("2_sweey")]
+streams = Array[AudioStream]([ExtResource("4_6k45u"), ExtResource("5_jk7yh"), ExtResource("6_743hg")])
+randomise_pitch = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_m6e35")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -1.5)
+shape = SubResource("RectangleShape2D_1j3vs")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_dpx4o")
+
+[node name="PlayerDetectionZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionZone"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_upumf")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="PlayerDetectionZone" to="." method="_on_player_detection_zone_area_entered"]

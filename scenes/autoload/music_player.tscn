@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3k6ouod4i3r7"]
+
+[ext_resource type="AudioStream" uid="uid://bd1g4uxldx0eg" path="res://audio/Funkeriffic.mp3" id="1_xnwqo"]
+[ext_resource type="Script" path="res://scenes/autoload/music_player.gd" id="2_ijtim"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_xnwqo")
+volume_db = -20.8
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_ijtim")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="finished" from="." to="." method="_on_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var movement_speed = 50
+@export var movement_speed : float = 50
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
@@ -18,6 +18,7 @@ func _ready():
 func _physics_process(_delta):
 	handle_input()
 	move_and_slide()
+	handle_collision()
 	update_animation()
 
 
@@ -29,6 +30,12 @@ func handle_input():
 	
 	if Input.is_action_just_pressed("attack"):
 		update_attack_animation()
+
+
+func handle_collision():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
 
 
 func update_animation():
@@ -91,5 +98,6 @@ func update_attack_animation():
 	weapon.visible = false
 
 
-
-
+func _on_hurtbox_area_entered(area):
+	if area.name == "Hitbox":
+		print("Damage player")

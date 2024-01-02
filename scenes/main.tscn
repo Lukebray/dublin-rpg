@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://4p76v83dj554"]
+[gd_scene load_steps=8 format=3 uid="uid://4p76v83dj554"]
 
 [ext_resource type="PackedScene" uid="uid://dyvnc0cct1ce6" path="res://scenes/entities/player.tscn" id="1_xex02"]
 [ext_resource type="Texture2D" uid="uid://b7wg4jdqj0w3s" path="res://art/tilemap_packed.png" id="2_r3bdp"]
 [ext_resource type="Script" path="res://scenes/FollowCam.gd" id="3_o3yoe"]
+[ext_resource type="PackedScene" uid="uid://c356qio6dv8ir" path="res://scenes/entities/basic_enemy.tscn" id="4_7sqng"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_kph2u"]
 tile_data = PackedInt32Array(0, 131072, 17, 65536, 131072, 17, 1, 589824, 16, 65537, 196608, 17, 2, 262144, 17, 65538, 262144, 17)
@@ -1527,7 +1528,8 @@ texture = ExtResource("2_r3bdp")
 2:6/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_fi5hx"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Roads"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
@@ -1556,10 +1558,13 @@ layer_1/tile_data = PackedInt32Array(4, 327680, 8, 5, 393216, 8, 6, 327680, 8, 1
 z_index = 1
 y_sort_enabled = true
 position = Vector2(103, 54)
-movement_speed = 100
 
 [node name="FollowCam" type="Camera2D" parent="TileMap/Player" node_paths=PackedStringArray("tilemap")]
 limit_smoothed = true
 position_smoothing_speed = 10.0
 script = ExtResource("3_o3yoe")
 tilemap = NodePath("../..")
+
+[node name="BasicEnemy" parent="TileMap" instance=ExtResource("4_7sqng")]
+z_index = 1
+position = Vector2(92.5147, 113.653)
