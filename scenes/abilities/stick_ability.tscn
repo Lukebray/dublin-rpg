@@ -1,7 +1,16 @@
-[gd_scene format=3 uid="uid://d3mdcvgnkh1bp"]
+[gd_scene load_steps=3 format=3 uid="uid://d3mdcvgnkh1bp"]
+
+[ext_resource type="Texture2D" uid="uid://rcihqf36k4u1" path="res://art/sword.png" id="1_hfjer"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_not4u"]
+size = Vector2(6, 12)
 
 [node name="StickAbility" type="Area2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+texture = ExtResource("1_hfjer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_not4u")
