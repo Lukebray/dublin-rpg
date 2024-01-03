@@ -1568,3 +1568,4 @@ tilemap = NodePath("../..")
 [node name="BasicEnemy" parent="TileMap" instance=ExtResource("4_7sqng")]
 z_index = 1
 position = Vector2(92.5147, 113.653)
+movement_speed = 40.0
