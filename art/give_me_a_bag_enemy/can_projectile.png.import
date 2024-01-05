@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://icudln6va4fy"
-path="res://.godot/imported/gimme_a_bag_enemy.png-79620043b52c02d7e9db6d7b60efb96b.ctex"
+uid="uid://qnt7vosjpgx6"
+path="res://.godot/imported/can_projectile.png-c105e1ce2bb31edfb96ca3b62a1e274b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/gimme_a_bag_enemy.png"
-dest_files=["res://.godot/imported/gimme_a_bag_enemy.png-79620043b52c02d7e9db6d7b60efb96b.ctex"]
+source_file="res://art/give_me_a_bag_enemy/can_projectile.png"
+dest_files=["res://.godot/imported/can_projectile.png-c105e1ce2bb31edfb96ca3b62a1e274b.ctex"]
 
 [params]
 

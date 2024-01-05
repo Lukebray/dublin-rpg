@@ -73,6 +73,7 @@ func update_animation():
 
 func update_attack_animation():
 	is_attacking = true
+	weapon.find_child("CollisionShape2D").set_disabled(false)
 	weapon.visible = true
 	if velocity == Vector2.ZERO:
 		if previous_movement_direction == Vector2.UP:
@@ -95,6 +96,7 @@ func update_attack_animation():
 		
 	await animation_player.animation_finished
 	is_attacking = false
+	weapon.find_child("CollisionShape2D").set_disabled(true)
 	weapon.visible = false
 
 

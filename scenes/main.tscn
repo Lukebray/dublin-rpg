@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dyvnc0cct1ce6" path="res://scenes/entities/player.tscn" id="1_xex02"]
 [ext_resource type="Texture2D" uid="uid://b7wg4jdqj0w3s" path="res://art/tilemap_packed.png" id="2_r3bdp"]
 [ext_resource type="Script" path="res://scenes/FollowCam.gd" id="3_o3yoe"]
-[ext_resource type="PackedScene" uid="uid://c356qio6dv8ir" path="res://scenes/entities/basic_enemy.tscn" id="4_7sqng"]
+[ext_resource type="PackedScene" uid="uid://c356qio6dv8ir" path="res://scenes/entities/enemies/give_me_a_bag/give_me_a_bag_enemy.tscn" id="4_0vrka"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_kph2u"]
 tile_data = PackedInt32Array(0, 131072, 17, 65536, 131072, 17, 1, 589824, 16, 65537, 196608, 17, 2, 262144, 17, 65538, 262144, 17)
@@ -1565,7 +1565,6 @@ position_smoothing_speed = 10.0
 script = ExtResource("3_o3yoe")
 tilemap = NodePath("../..")
 
-[node name="BasicEnemy" parent="TileMap" instance=ExtResource("4_7sqng")]
+[node name="GiveMeABagEnemy" parent="TileMap" instance=ExtResource("4_0vrka")]
 z_index = 1
-position = Vector2(92.5147, 113.653)
-movement_speed = 40.0
+position = Vector2(89.9448, 117.367)
