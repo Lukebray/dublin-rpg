@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://dyvnc0cct1ce6"]
 
-[ext_resource type="Texture2D" uid="uid://hodmbfjevquq" path="res://art/player.png" id="1_cxqos"]
 [ext_resource type="Script" path="res://scenes/entities/player.gd" id="1_vav3l"]
+[ext_resource type="Texture2D" uid="uid://hodmbfjevquq" path="res://art/player/player.png" id="2_g7mux"]
 [ext_resource type="PackedScene" uid="uid://d3mdcvgnkh1bp" path="res://scenes/abilities/stick_ability.tscn" id="3_lxpm8"]
 
 [sub_resource type="Animation" id="Animation_1lf8e"]
@@ -347,7 +347,7 @@ collision_mask = 2
 script = ExtResource("1_vav3l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_cxqos")
+texture = ExtResource("2_g7mux")
 offset = Vector2(0, -17)
 hframes = 6
 vframes = 10

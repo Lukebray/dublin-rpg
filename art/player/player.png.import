@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s2pms4jx3dyo"
-path="res://.godot/imported/hurley.png-4a5d7bc0f47e807cced6d9203ebf3aad.ctex"
+uid="uid://hodmbfjevquq"
+path="res://.godot/imported/player.png-32e680dcdebcfba51bc51495de98466e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/hurley.png"
-dest_files=["res://.godot/imported/hurley.png-4a5d7bc0f47e807cced6d9203ebf3aad.ctex"]
+source_file="res://art/player/player.png"
+dest_files=["res://.godot/imported/player.png-32e680dcdebcfba51bc51495de98466e.ctex"]
 
 [params]
 

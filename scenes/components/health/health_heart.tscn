@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://0du6jjxrhlxb"]
+
+[ext_resource type="Script" path="res://scenes/components/health/health_heart.gd" id="1_0o1jq"]
+[ext_resource type="Texture2D" uid="uid://b3p6v235ck44p" path="res://art/hearts/heart.png" id="1_qmkqb"]
+
+[node name="HealthHeart" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(15, 13)
+offset_right = 15.0
+offset_bottom = 13.0
+script = ExtResource("1_0o1jq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.045614, 0.045614)
+texture = ExtResource("1_qmkqb")
+centered = false

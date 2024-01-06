@@ -1,5 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://4p76v83dj554"]
+[gd_scene load_steps=10 format=3 uid="uid://4p76v83dj554"]
 
+[ext_resource type="PackedScene" uid="uid://npjun6tyy67s" path="res://scenes/components/health/health_container.tscn" id="1_b718l"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_gr2ww"]
 [ext_resource type="PackedScene" uid="uid://dyvnc0cct1ce6" path="res://scenes/entities/player.tscn" id="1_xex02"]
 [ext_resource type="Texture2D" uid="uid://b7wg4jdqj0w3s" path="res://art/tilemap_packed.png" id="2_r3bdp"]
 [ext_resource type="Script" path="res://scenes/FollowCam.gd" id="3_o3yoe"]
@@ -1537,6 +1539,11 @@ sources/0 = SubResource("TileSetAtlasSource_umjtc")
 pattern_0 = SubResource("TileMapPattern_kph2u")
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_gr2ww")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthContainer" parent="CanvasLayer" instance=ExtResource("1_b718l")]
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true

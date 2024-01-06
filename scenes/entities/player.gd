@@ -1,13 +1,19 @@
 extends CharacterBody2D
 
+signal health_changed
+
 @export var movement_speed : float = 50
+@export var knockback_power = 500
+@export var max_health : int = 3
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
 @onready var weapon = $Weapon as Node2D
+@onready var current_health : int = max_health
 
 var previous_movement_direction : Vector2
 var is_attacking : bool
+
 
 func _ready():
 	is_attacking = false
@@ -18,7 +24,7 @@ func _ready():
 func _physics_process(_delta):
 	handle_input()
 	move_and_slide()
-	handle_collision()
+	#handle_collision()
 	update_animation()
 
 
@@ -101,5 +107,10 @@ func update_attack_animation():
 
 
 func _on_hurtbox_area_entered(area):
-	if area.name == "Hitbox":
-		print("Damage player")
+	if area.get_parent().is_in_group("enemy_projectile"):
+		current_health -= 1
+		if current_health < 0:
+			current_health = max_health
+		health_changed.emit(current_health)
+		area.get_parent().queue_free()
+
