@@ -24,7 +24,7 @@ func _ready():
 func _physics_process(_delta):
 	handle_input()
 	move_and_slide()
-	#handle_collision()
+	handle_collision()
 	update_animation()
 
 

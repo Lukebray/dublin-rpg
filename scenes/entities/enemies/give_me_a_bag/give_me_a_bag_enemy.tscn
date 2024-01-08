@@ -21,8 +21,8 @@ size = Vector2(16, 16)
 
 [node name="GiveMeABagEnemy" type="CharacterBody2D"]
 y_sort_enabled = true
-collision_layer = 2
-collision_mask = 6
+collision_layer = 8
+collision_mask = 14
 motion_mode = 1
 script = ExtResource("1_gntgd")
 movement_speed = 30.0
@@ -79,6 +79,7 @@ script = ExtResource("12_rl8y2")
 
 [node name="PlayerDetectionRay" type="RayCast2D" parent="."]
 position = Vector2(0, -8)
+collision_mask = 2
 collide_with_areas = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -86,7 +87,7 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_1j3vs")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]

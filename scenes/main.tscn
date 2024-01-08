@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://4p76v83dj554"]
+[gd_scene load_steps=11 format=3 uid="uid://4p76v83dj554"]
 
 [ext_resource type="PackedScene" uid="uid://npjun6tyy67s" path="res://scenes/components/health/health_container.tscn" id="1_b718l"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_gr2ww"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b7wg4jdqj0w3s" path="res://art/tilemap_packed.png" id="2_r3bdp"]
 [ext_resource type="Script" path="res://scenes/FollowCam.gd" id="3_o3yoe"]
 [ext_resource type="PackedScene" uid="uid://c356qio6dv8ir" path="res://scenes/entities/enemies/give_me_a_bag/give_me_a_bag_enemy.tscn" id="4_0vrka"]
+[ext_resource type="PackedScene" uid="uid://djnpn2x5htvwo" path="res://scenes/entities/enemies/dublin_scumbag/dublin_scum_bag_enemy.tscn" id="7_odxia"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_kph2u"]
 tile_data = PackedInt32Array(0, 131072, 17, 65536, 131072, 17, 1, 589824, 16, 65537, 196608, 17, 2, 262144, 17, 65538, 262144, 17)
@@ -1565,6 +1566,7 @@ layer_1/tile_data = PackedInt32Array(4, 327680, 8, 5, 393216, 8, 6, 327680, 8, 1
 z_index = 1
 y_sort_enabled = true
 position = Vector2(103, 54)
+collision_mask = 9
 
 [node name="FollowCam" type="Camera2D" parent="TileMap/Player" node_paths=PackedStringArray("tilemap")]
 limit_smoothed = true
@@ -1574,4 +1576,10 @@ tilemap = NodePath("../..")
 
 [node name="GiveMeABagEnemy" parent="TileMap" instance=ExtResource("4_0vrka")]
 z_index = 1
-position = Vector2(89.9448, 117.367)
+position = Vector2(163.828, 159.709)
+collision_mask = 15
+
+[node name="DublinScumBagEnemy" parent="TileMap" instance=ExtResource("7_odxia")]
+z_index = 1
+position = Vector2(104.079, 32.6846)
+collision_mask = 15
