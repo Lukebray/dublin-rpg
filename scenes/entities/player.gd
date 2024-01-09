@@ -9,7 +9,8 @@ signal health_changed
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
 @onready var weapon = $Weapon as Node2D
-@onready var current_health : int = max_health
+@onready var health_component = $HealthComponent
+
 
 var previous_movement_direction : Vector2
 var is_attacking : bool
@@ -106,11 +107,5 @@ func update_attack_animation():
 	weapon.visible = false
 
 
-func _on_hurtbox_area_entered(area):
-	if area.get_parent().is_in_group("enemy_projectile"):
-		current_health -= 1
-		if current_health < 0:
-			current_health = max_health
-		health_changed.emit(current_health)
-		area.get_parent().queue_free()
-
+func _on_health_component_health_changed():
+	health_changed.emit(health_component.current_health)

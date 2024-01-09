@@ -1,19 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3mdcvgnkh1bp"]
+[gd_scene load_steps=4 format=3 uid="uid://d3mdcvgnkh1bp"]
 
 [ext_resource type="Texture2D" uid="uid://s2pms4jx3dyo" path="res://art/player/hurley.png" id="1_yptam"]
+[ext_resource type="PackedScene" uid="uid://iukm2x1p5q2u" path="res://scenes/components/hitbox_component.tscn" id="2_338bo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_not4u"]
 size = Vector2(6, 12)
 
-[node name="StickAbility" type="Area2D" groups=["weapon"]]
-collision_layer = 4
-collision_mask = 0
+[node name="StickAbility" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, -5)
 texture = ExtResource("1_yptam")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="HitboxComponent" parent="." instance=ExtResource("2_338bo")]
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(1, -7)
 shape = SubResource("RectangleShape2D_not4u")
 disabled = true

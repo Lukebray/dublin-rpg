@@ -8,11 +8,10 @@ class_name ShootState
 var audio_playing : bool
 
 func transition():
-	var max_health = owner.max_health
-	var current_health = owner.current_health
+	var owner_health_componment = owner.get_node("HealthComponent")
 	
 	if not player_detection_ray.is_colliding():
-		if current_health > max_health / 2:
+		if owner_health_componment.get_health_percent() > 0.5:
 				get_parent().change_state("Follow")
 		else:
 			get_parent().change_state("Dash")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwt1yu4y740qt"]
+[gd_scene load_steps=5 format=3 uid="uid://bwt1yu4y740qt"]
 
 [ext_resource type="Script" path="res://scenes/entities/enemies/give_me_a_bag/give_me_a_bag_enemy_projectile.gd" id="1_2upp7"]
 [ext_resource type="Texture2D" uid="uid://qnt7vosjpgx6" path="res://art/give_me_a_bag_enemy/can_projectile.png" id="2_pjfmq"]
+[ext_resource type="PackedScene" uid="uid://iukm2x1p5q2u" path="res://scenes/components/hitbox_component.tscn" id="3_kpkda"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yocyb"]
 size = Vector2(4, 6)
@@ -11,17 +12,18 @@ z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_2upp7")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_yocyb")
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.472943, 0.472943)
 texture = ExtResource("2_pjfmq")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_kpkda")]
+collision_layer = 8
+collision_mask = 2
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_yocyb")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

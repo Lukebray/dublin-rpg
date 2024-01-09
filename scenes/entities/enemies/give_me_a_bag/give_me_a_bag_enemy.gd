@@ -4,15 +4,7 @@ extends CharacterBody2D
 @onready var player_detection_ray = $PlayerDetectionRay
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var health_bar = $HealthBar
-
-@export var max_health : int = 4
-var current_health: = max_health: #setter function for health. This function will run when there is a change in the health variable!
-	set(value):
-		if (value != 0):
-			current_health = value
-			health_bar.value = value
-		else: 
-			queue_free()
+@onready var health_component = $HealthComponent
 
 @export var movement_speed : float = 50.0
 @export var acceleration : float = 5
@@ -23,6 +15,7 @@ var audio_playing : bool = false
 
 
 func _ready():
+	health_bar.value = health_component.max_health
 	set_physics_process(false)
 
 
@@ -37,6 +30,9 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _on_hitbox_area_entered(area):
-	if (area.name == "StickAbility"):
-		current_health -=1
+func _on_health_component_health_changed():
+	update_health_display()
+
+
+func update_health_display():
+	health_bar.value = health_component.get_health_percent()

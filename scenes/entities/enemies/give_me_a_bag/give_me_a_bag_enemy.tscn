@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://c356qio6dv8ir"]
+[gd_scene load_steps=17 format=3 uid="uid://c356qio6dv8ir"]
 
 [ext_resource type="Script" path="res://scenes/entities/enemies/give_me_a_bag/give_me_a_bag_enemy.gd" id="1_gntgd"]
 [ext_resource type="PackedScene" uid="uid://p4c321o2n7ho" path="res://scenes/components/random_stream_player_2d_component.tscn" id="2_08hsj"]
 [ext_resource type="Texture2D" uid="uid://icudln6va4fy" path="res://art/give_me_a_bag_enemy/gimme_a_bag_enemy.png" id="2_djiko"]
+[ext_resource type="PackedScene" uid="uid://dq70dfgj4rbxd" path="res://scenes/components/health_component.tscn" id="2_mo5j6"]
 [ext_resource type="AudioStream" uid="uid://b5k48w2fx21gl" path="res://audio/junkie_enemy/junkie_get_out_of_my_way.wav" id="3_s0mem"]
 [ext_resource type="AudioStream" uid="uid://2lbqeq2yroml" path="res://audio/junkie_enemy/junkie_gimme_a_bag.wav" id="4_r8kdy"]
 [ext_resource type="AudioStream" uid="uid://dq3swpg2i72s4" path="res://audio/junkie_enemy/junkie_gimme_a_bag_now.wav" id="5_mt1nw"]
@@ -12,12 +13,13 @@
 [ext_resource type="Script" path="res://scenes/entities/Follow.gd" id="10_q43re"]
 [ext_resource type="PackedScene" uid="uid://bwt1yu4y740qt" path="res://scenes/entities/enemies/give_me_a_bag/give_me_a_bag_enemy_projectile.tscn" id="10_s3dv3"]
 [ext_resource type="Script" path="res://scenes/entities/enemies/give_me_a_bag/Dash.gd" id="12_rl8y2"]
+[ext_resource type="PackedScene" uid="uid://byy5lcpukjnap" path="res://scenes/components/hurtbox_component.tscn" id="14_ga3n5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1j3vs"]
 size = Vector2(7, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dpx4o"]
-size = Vector2(16, 16)
+size = Vector2(15, 16)
 
 [node name="GiveMeABagEnemy" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -26,6 +28,9 @@ collision_mask = 14
 motion_mode = 1
 script = ExtResource("1_gntgd")
 movement_speed = 30.0
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_mo5j6")]
+max_health = 4.0
 
 [node name="RandomStreamPlayer2DComponent" parent="." instance=ExtResource("2_08hsj")]
 volume_db = -10.0
@@ -50,8 +55,8 @@ offset_top = -23.0
 offset_right = 91.0
 offset_bottom = 4.0
 scale = Vector2(0.182417, 0.182417)
-max_value = 4.0
-value = 4.0
+max_value = 1.0
+value = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
@@ -86,14 +91,13 @@ collide_with_areas = true
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_1j3vs")
 
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 4
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("14_ga3n5")]
+health_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, -8)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(-0.5, -8)
 shape = SubResource("RectangleShape2D_dpx4o")
 
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="timeout" from="FiniteStateMachine/Shoot/Timer" to="FiniteStateMachine/Shoot" method="_on_timer_timeout"]
 [connection signal="timeout" from="FiniteStateMachine/Dash/Timer" to="FiniteStateMachine/Dash" method="_on_timer_timeout"]
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
