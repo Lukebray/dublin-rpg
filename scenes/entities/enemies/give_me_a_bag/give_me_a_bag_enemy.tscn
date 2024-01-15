@@ -38,7 +38,6 @@ streams = Array[AudioStream]([ExtResource("3_s0mem"), ExtResource("4_r8kdy"), Ex
 randomise_pitch = false
 
 [node name="Debug" type="Label" parent="."]
-visible = false
 offset_left = -6.0
 offset_top = -24.0
 offset_right = 24.0

@@ -3,8 +3,8 @@ extends HBoxContainer
 @export var heart_gui_class = preload("res://scenes/components/health/health_heart.tscn")
 
 
-func set_max_health(max : int):
-	for i in range(max):
+func set_max_health(max_health : int):
+	for i in range(max_health):
 		var heart = heart_gui_class.instantiate()
 		add_child(heart)
 

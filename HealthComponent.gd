@@ -31,6 +31,5 @@ func check_death():
 		return
 	
 	if current_health == 0:
-		print("ENEMY KILLED!")
 		died.emit()
 		owner.queue_free() # get rid of entity this component is on

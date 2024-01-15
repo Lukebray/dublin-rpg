@@ -25,7 +25,6 @@ func _ready():
 func _physics_process(_delta):
 	handle_input()
 	move_and_slide()
-	handle_collision()
 	update_animation()
 
 
@@ -37,13 +36,6 @@ func handle_input():
 	
 	if Input.is_action_just_pressed("attack"):
 		update_attack_animation()
-
-
-func handle_collision():
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var collider = collision.get_collider()
-
 
 func update_animation():
 	if is_attacking:
@@ -107,5 +99,16 @@ func update_attack_animation():
 	weapon.visible = false
 
 
+func knockback(enemy_vlocity):
+	var knockback_direction = (enemy_vlocity - velocity).normalized() * knockback_power
+	velocity = knockback_direction
+	move_and_slide()
+
+
 func _on_health_component_health_changed():
 	health_changed.emit(health_component.current_health)
+
+
+func _on_hurtbox_component_hit(enemy_vlocity):
+	knockback(enemy_vlocity)
+	

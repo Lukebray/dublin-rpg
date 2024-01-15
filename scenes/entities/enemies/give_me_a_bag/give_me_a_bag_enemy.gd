@@ -24,7 +24,7 @@ func _process(_delta):
 	player_detection_ray.target_position = direction * 40
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var desired_velocity = direction * movement_speed
 	velocity = velocity.lerp(desired_velocity, 1 - exp(-acceleration * get_process_delta_time())) 
 	move_and_slide()

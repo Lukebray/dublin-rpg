@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://djnpn2x5htvwo"]
+[gd_scene load_steps=9 format=3 uid="uid://djnpn2x5htvwo"]
 
 [ext_resource type="Texture2D" uid="uid://bt3txetadrh18" path="res://art/dublin_scum_bag_enemy/spr_bike2man_0.png" id="1_2ynf8"]
 [ext_resource type="Script" path="res://scenes/entities/enemies/dublin_scumbag/dublin_scum_bag_enemy.gd" id="1_atntv"]
+[ext_resource type="PackedScene" uid="uid://dq70dfgj4rbxd" path="res://scenes/components/health_component.tscn" id="2_4hbj6"]
+[ext_resource type="PackedScene" uid="uid://byy5lcpukjnap" path="res://scenes/components/hurtbox_component.tscn" id="4_usf1j"]
+[ext_resource type="PackedScene" uid="uid://iukm2x1p5q2u" path="res://scenes/components/hitbox_component.tscn" id="5_nafoa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c4fqw"]
 size = Vector2(19, 5)
@@ -10,10 +13,17 @@ size = Vector2(19, 5)
 radius = 5.0
 height = 16.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yd58k"]
+size = Vector2(17, 7)
+
 [node name="DublinScumBagEnemy" type="CharacterBody2D"]
-collision_layer = 8
-collision_mask = 10
+z_index = 1
+collision_layer = 0
+collision_mask = 9
 script = ExtResource("1_atntv")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_4hbj6")]
+max_health = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.198649, -8.3973)
@@ -24,12 +34,19 @@ texture = ExtResource("1_2ynf8")
 position = Vector2(-0.5, -2.5)
 shape = SubResource("RectangleShape2D_c4fqw")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_usf1j")]
 collision_layer = 8
-collision_mask = 4
+health_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(-1, -9)
 shape = SubResource("CapsuleShape2D_b0r0c")
 
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[node name="HitboxComponent" parent="." instance=ExtResource("5_nafoa")]
+collision_layer = 8
+collision_mask = 2
+damage = 1
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-0.5, -3.5)
+shape = SubResource("RectangleShape2D_yd58k")
