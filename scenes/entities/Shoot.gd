@@ -44,6 +44,6 @@ func shoot():
 	var projectile = projectile_node.instantiate()
 	
 	projectile.position = global_position
-	projectile.direction = (player.global_position - global_position).normalized()
+	projectile.direction = ((player.global_position + Vector2(player.get_node("Sprite2D").offset.x, (player.get_node("Sprite2D").offset.y / 2))) - global_position).normalized() #the offsets are so it aims at the centre of the sprite
 	
 	get_tree().current_scene.call_deferred("add_child", projectile)

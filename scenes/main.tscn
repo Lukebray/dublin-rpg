@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://4p76v83dj554"]
+[gd_scene load_steps=14 format=3 uid="uid://4p76v83dj554"]
 
 [ext_resource type="PackedScene" uid="uid://npjun6tyy67s" path="res://scenes/components/health/health_container.tscn" id="1_b718l"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_gr2ww"]
-[ext_resource type="PackedScene" uid="uid://dyvnc0cct1ce6" path="res://scenes/entities/player.tscn" id="1_xex02"]
+[ext_resource type="PackedScene" uid="uid://dyvnc0cct1ce6" path="res://scenes/entities/player/player.tscn" id="1_xex02"]
 [ext_resource type="Texture2D" uid="uid://b7wg4jdqj0w3s" path="res://art/tilemap_packed.png" id="2_r3bdp"]
 [ext_resource type="Script" path="res://scenes/FollowCam.gd" id="3_o3yoe"]
 [ext_resource type="PackedScene" uid="uid://c356qio6dv8ir" path="res://scenes/entities/enemies/give_me_a_bag/give_me_a_bag_enemy.tscn" id="4_0vrka"]
 [ext_resource type="PackedScene" uid="uid://djnpn2x5htvwo" path="res://scenes/entities/enemies/dublin_scumbag/dublin_scum_bag_enemy.tscn" id="7_odxia"]
+[ext_resource type="PackedScene" uid="uid://4cj1gs0njngd" path="res://scenes/entities/npcs/npc.tscn" id="8_u1cjk"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_kph2u"]
 tile_data = PackedInt32Array(0, 131072, 17, 65536, 131072, 17, 1, 589824, 16, 65537, 196608, 17, 2, 262144, 17, 65538, 262144, 17)
@@ -1577,9 +1578,15 @@ position_smoothing_speed = 10.0
 script = ExtResource("3_o3yoe")
 tilemap = NodePath("../..")
 
+[node name="NPC" parent="TileMap" groups=["npc"] instance=ExtResource("8_u1cjk")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(222.292, 237.706)
+scale = Vector2(0.642463, 0.742832)
+
 [node name="GiveMeABagEnemy" parent="TileMap" instance=ExtResource("4_0vrka")]
 z_index = 1
-position = Vector2(177.962, -498.44)
+position = Vector2(173.465, 319.418)
 collision_mask = 15
 
 [node name="DublinScumBagEnemy" parent="TileMap" node_paths=PackedStringArray("end_point") instance=ExtResource("7_odxia")]
@@ -1609,3 +1616,7 @@ end_point = NodePath("Marker2D4")
 
 [node name="Marker2D4" type="Marker2D" parent="TileMap/DublinScumBagEnemy4"]
 position = Vector2(47.5423, -5.94269)
+
+[node name="Drops" type="Node2D" parent="TileMap" groups=["drops_layer"]]
+z_index = 1
+y_sort_enabled = true

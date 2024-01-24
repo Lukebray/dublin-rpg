@@ -16,7 +16,7 @@ height = 16.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yd58k"]
 size = Vector2(17, 7)
 
-[node name="DublinScumBagEnemy" type="CharacterBody2D"]
+[node name="DublinScumBagEnemy" type="CharacterBody2D" groups=["enemy"]]
 z_index = 1
 collision_layer = 0
 collision_mask = 9

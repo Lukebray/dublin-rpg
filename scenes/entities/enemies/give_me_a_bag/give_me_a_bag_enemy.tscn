@@ -1,10 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://c356qio6dv8ir"]
+[gd_scene load_steps=19 format=3 uid="uid://c356qio6dv8ir"]
 
 [ext_resource type="Script" path="res://scenes/entities/enemies/give_me_a_bag/give_me_a_bag_enemy.gd" id="1_gntgd"]
 [ext_resource type="PackedScene" uid="uid://p4c321o2n7ho" path="res://scenes/components/random_stream_player_2d_component.tscn" id="2_08hsj"]
 [ext_resource type="Texture2D" uid="uid://icudln6va4fy" path="res://art/give_me_a_bag_enemy/gimme_a_bag_enemy.png" id="2_djiko"]
+[ext_resource type="PackedScene" uid="uid://chdi8tl2552ud" path="res://scenes/entities/pickups/coin_pickup.tscn" id="2_mii63"]
 [ext_resource type="PackedScene" uid="uid://dq70dfgj4rbxd" path="res://scenes/components/health_component.tscn" id="2_mo5j6"]
 [ext_resource type="AudioStream" uid="uid://b5k48w2fx21gl" path="res://audio/junkie_enemy/junkie_get_out_of_my_way.wav" id="3_s0mem"]
+[ext_resource type="PackedScene" uid="uid://8wl8ws8t3lqb" path="res://scenes/components/drop_component.tscn" id="4_ony8t"]
 [ext_resource type="AudioStream" uid="uid://2lbqeq2yroml" path="res://audio/junkie_enemy/junkie_gimme_a_bag.wav" id="4_r8kdy"]
 [ext_resource type="AudioStream" uid="uid://dq3swpg2i72s4" path="res://audio/junkie_enemy/junkie_gimme_a_bag_now.wav" id="5_mt1nw"]
 [ext_resource type="Script" path="res://scenes/entities/FiniteStateMachine.gd" id="7_duys6"]
@@ -21,16 +23,21 @@ size = Vector2(7, 3)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dpx4o"]
 size = Vector2(15, 16)
 
-[node name="GiveMeABagEnemy" type="CharacterBody2D"]
+[node name="GiveMeABagEnemy" type="CharacterBody2D" groups=["enemy"]]
 y_sort_enabled = true
 collision_layer = 8
 collision_mask = 14
 motion_mode = 1
 script = ExtResource("1_gntgd")
+coin_node = ExtResource("2_mii63")
 movement_speed = 30.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_mo5j6")]
-max_health = 4.0
+max_health = 1.0
+
+[node name="DropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_ony8t")]
+health_component = NodePath("../HealthComponent")
+drop_item_scene = ExtResource("2_mii63")
 
 [node name="RandomStreamPlayer2DComponent" parent="." instance=ExtResource("2_08hsj")]
 volume_db = -10.0
@@ -38,6 +45,7 @@ streams = Array[AudioStream]([ExtResource("3_s0mem"), ExtResource("4_r8kdy"), Ex
 randomise_pitch = false
 
 [node name="Debug" type="Label" parent="."]
+visible = false
 offset_left = -6.0
 offset_top = -24.0
 offset_right = 24.0
@@ -97,6 +105,7 @@ health_component = NodePath("../HealthComponent")
 position = Vector2(-0.5, -8)
 shape = SubResource("RectangleShape2D_dpx4o")
 
+[connection signal="died" from="HealthComponent" to="DropComponent" method="_on_health_component_died"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="timeout" from="FiniteStateMachine/Shoot/Timer" to="FiniteStateMachine/Shoot" method="_on_timer_timeout"]
 [connection signal="timeout" from="FiniteStateMachine/Dash/Timer" to="FiniteStateMachine/Dash" method="_on_timer_timeout"]

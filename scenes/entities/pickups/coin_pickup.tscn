@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://chdi8tl2552ud"]
+
+[ext_resource type="Texture2D" uid="uid://cbhuhxd2kn3fx" path="res://art/gold_coin/goldCoin1.png" id="1_qgrwh"]
+[ext_resource type="Texture2D" uid="uid://coh841dbk0u2m" path="res://art/gold_coin/goldCoin2.png" id="2_htjse"]
+[ext_resource type="Texture2D" uid="uid://cv4g4hglqcasd" path="res://art/gold_coin/goldCoin3.png" id="3_icvfm"]
+[ext_resource type="Texture2D" uid="uid://7m15o13rt1ae" path="res://art/gold_coin/goldCoin4.png" id="4_bsq3x"]
+[ext_resource type="Texture2D" uid="uid://dh3216r8pktwb" path="res://art/gold_coin/goldCoin5.png" id="5_3suls"]
+[ext_resource type="Texture2D" uid="uid://d2uu81nh7dko1" path="res://art/gold_coin/goldCoin6.png" id="6_e2epk"]
+[ext_resource type="Texture2D" uid="uid://clqck5eagyvou" path="res://art/gold_coin/goldCoin7.png" id="7_5450w"]
+[ext_resource type="Texture2D" uid="uid://txykwatw4jpy" path="res://art/gold_coin/goldCoin8.png" id="8_hj3or"]
+[ext_resource type="Texture2D" uid="uid://dljs6u8fjux46" path="res://art/gold_coin/goldCoin9.png" id="9_urafb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jf00i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qgrwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_htjse")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_icvfm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bsq3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3suls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_e2epk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5450w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hj3or")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_urafb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yukxk"]
+radius = 3.0
+
+[node name="EuroPickup" type="Area2D"]
+y_sort_enabled = true
+collision_layer = 16
+collision_mask = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4.76837e-07, 4.76837e-07)
+scale = Vector2(0.625, 0.625)
+sprite_frames = SubResource("SpriteFrames_jf00i")
+autoplay = "default"
+frame_progress = 0.0387838
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yukxk")

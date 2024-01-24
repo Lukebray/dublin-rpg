@@ -23,7 +23,7 @@ func _on_area_entered(area): #when the hurtbox collides with a hitbox do this
 		if area.owner is CharacterBody2D:
 			enemy_velocity = area.owner.velocity
 			
-		hit.emit(enemy_velocity)
+		hit.emit(enemy_velocity, area)
 		var hitbox_component = area as HitboxComponent
 		health_component.damage(hitbox_component.damage)
 

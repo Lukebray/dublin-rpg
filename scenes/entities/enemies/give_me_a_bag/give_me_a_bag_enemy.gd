@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var health_bar = $HealthBar
 @onready var health_component = $HealthComponent
 
+@export var coin_node : PackedScene
 @export var movement_speed : float = 50.0
 @export var acceleration : float = 5
 
@@ -36,3 +37,5 @@ func _on_health_component_health_changed():
 
 func update_health_display():
 	health_bar.value = health_component.get_health_percent()
+
+

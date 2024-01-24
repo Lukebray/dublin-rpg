@@ -109,6 +109,7 @@ func _on_health_component_health_changed():
 	health_changed.emit(health_component.current_health)
 
 
-func _on_hurtbox_component_hit(enemy_vlocity):
-	knockback(enemy_vlocity)
+func _on_hurtbox_component_hit(enemy_vlocity, enemy_area):
+	if enemy_area.is_in_group("enemy"):
+		knockback(enemy_vlocity)
 	
