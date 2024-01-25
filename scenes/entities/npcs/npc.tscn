@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://4cj1gs0njngd"]
+[gd_scene load_steps=25 format=3 uid="uid://4cj1gs0njngd"]
 
 [ext_resource type="Script" path="res://scenes/entities/npcs/npc.gd" id="1_fb8ey"]
 [ext_resource type="Texture2D" uid="uid://db06y7c5knnyp" path="res://art/npc/Human-Worker-Red.png" id="2_8h1gh"]
+[ext_resource type="AudioStream" uid="uid://dyofred2hhg31" path="res://audio/npc1/euro_for_a_hostel.mp3" id="2_bnsw6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ssvk4"]
 atlas = ExtResource("2_8h1gh")
@@ -168,6 +169,10 @@ collision_layer = 32
 collision_mask = 10
 motion_mode = 1
 script = ExtResource("1_fb8ey")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_bnsw6")
+bus = &"SFX"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

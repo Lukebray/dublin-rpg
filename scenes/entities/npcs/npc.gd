@@ -63,9 +63,12 @@ func _process(_delta):
 			$AnimatedSprite2D.play("walk_south")
 
 	if Input.is_action_just_pressed("action") && player_in_chat_zone == true:
-		print("chatting with NPC")
 		is_roaming = false
 		is_chatting = true
+		
+		if !$AudioStreamPlayer2D.playing:
+			$AudioStreamPlayer2D.play()
+
 		$AnimatedSprite2D.play("idle")
 
 
@@ -101,7 +104,6 @@ func move():
 		velocity = current_agent_position.direction_to(next_path_position).normalized() * movement_speed
 
 
-
 func get_random_direction():
 	return choose([Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN])
 
@@ -114,6 +116,8 @@ func _on_chat_detection_body_entered(body):
 func _on_chat_detection_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_chat_zone = false
+		is_roaming = true
+		is_chatting = false
 
 
 func _on_timer_timeout():
