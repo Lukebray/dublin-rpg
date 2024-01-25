@@ -161,12 +161,15 @@ animations = [{
 size = Vector2(8, 3)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yb2ui"]
-radius = 11.0
+radius = 14.0
 
 [node name="NPC" type="CharacterBody2D"]
 collision_layer = 32
-collision_mask = 11
+collision_mask = 10
+motion_mode = 1
 script = ExtResource("1_fb8ey")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
@@ -178,6 +181,8 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_1mixh")
 
 [node name="ChatDetection" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChatDetection"]
 position = Vector2(0, -6)

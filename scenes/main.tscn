@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://4p76v83dj554"]
+[gd_scene load_steps=15 format=3 uid="uid://4p76v83dj554"]
 
 [ext_resource type="PackedScene" uid="uid://npjun6tyy67s" path="res://scenes/components/health/health_container.tscn" id="1_b718l"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_gr2ww"]
@@ -1542,6 +1542,11 @@ pattern_0 = SubResource("TileMapPattern_kph2u")
 pattern_1 = SubResource("TileMapPattern_asg2c")
 pattern_2 = SubResource("TileMapPattern_6g0u5")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ir5bb"]
+vertices = PackedVector2Array(116, 432, 116, 520, 84, 520, 84, 432)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(84, 432, 84, 520, 116, 520, 116, 432)])
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_gr2ww")
 
@@ -1568,7 +1573,7 @@ layer_1/tile_data = PackedInt32Array(-2490358, 327680, 8, -2490360, 327680, 8, -
 [node name="Player" parent="TileMap" instance=ExtResource("1_xex02")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(217.795, 316.446)
+position = Vector2(175.392, 317.932)
 collision_mask = 9
 
 [node name="FollowCam" type="Camera2D" parent="TileMap/Player" node_paths=PackedStringArray("tilemap")]
@@ -1581,12 +1586,12 @@ tilemap = NodePath("../..")
 [node name="NPC" parent="TileMap" groups=["npc"] instance=ExtResource("8_u1cjk")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(222.292, 237.706)
+position = Vector2(143.912, 291.19)
 scale = Vector2(0.642463, 0.742832)
 
 [node name="GiveMeABagEnemy" parent="TileMap" instance=ExtResource("4_0vrka")]
 z_index = 1
-position = Vector2(173.465, 319.418)
+position = Vector2(212.013, 192.393)
 collision_mask = 15
 
 [node name="DublinScumBagEnemy" parent="TileMap" node_paths=PackedStringArray("end_point") instance=ExtResource("7_odxia")]
@@ -1620,3 +1625,7 @@ position = Vector2(47.5423, -5.94269)
 [node name="Drops" type="Node2D" parent="TileMap" groups=["drops_layer"]]
 z_index = 1
 y_sort_enabled = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(140, -40)
+navigation_polygon = SubResource("NavigationPolygon_ir5bb")

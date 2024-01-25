@@ -11,6 +11,7 @@ var enemy_velocity : Vector2 = Vector2.ZERO
 var invulnerable : bool = false
 
 func _on_area_entered(area): #when the hurtbox collides with a hitbox do this
+	print("area = ", area)
 	if not area is HitboxComponent:
 		return
 		
