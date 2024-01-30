@@ -1,5 +1,5 @@
 extends Node2D
-class_name State
+class_name MyState
 
 
 @onready var player = get_tree().get_first_node_in_group("player")

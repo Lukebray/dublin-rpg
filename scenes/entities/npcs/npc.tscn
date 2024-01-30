@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://4cj1gs0njngd"]
+[gd_scene load_steps=27 format=3 uid="uid://4cj1gs0njngd"]
 
-[ext_resource type="Script" path="res://scenes/entities/npcs/npc.gd" id="1_fb8ey"]
 [ext_resource type="Texture2D" uid="uid://db06y7c5knnyp" path="res://art/npc/Human-Worker-Red.png" id="2_8h1gh"]
 [ext_resource type="AudioStream" uid="uid://dyofred2hhg31" path="res://audio/npc1/euro_for_a_hostel.mp3" id="2_bnsw6"]
+[ext_resource type="PackedScene" uid="uid://dvfr7g0l0dg4u" path="res://scenes/components/actionable.tscn" id="4_l01cb"]
+[ext_resource type="Resource" uid="uid://s7b572ljdvmq" path="res://dialogues/test.dialogue" id="5_1ul67"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ssvk4"]
 atlas = ExtResource("2_8h1gh")
@@ -164,22 +165,23 @@ size = Vector2(8, 3)
 [sub_resource type="CircleShape2D" id="CircleShape2D_yb2ui"]
 radius = 14.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_h3h1c"]
+radius = 6.0
+
 [node name="NPC" type="CharacterBody2D"]
 collision_layer = 32
 collision_mask = 10
 motion_mode = 1
-script = ExtResource("1_fb8ey")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_bnsw6")
 bus = &"SFX"
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_h5vjc")
 animation = &"idle"
+autoplay = "idle"
 
 [node name="PhysicsCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)
@@ -196,6 +198,9 @@ shape = SubResource("CircleShape2D_yb2ui")
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[connection signal="body_entered" from="ChatDetection" to="." method="_on_chat_detection_body_entered"]
-[connection signal="body_exited" from="ChatDetection" to="." method="_on_chat_detection_body_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Actionable" parent="." groups=["npcs"] instance=ExtResource("4_l01cb")]
+dialogue_resource = ExtResource("5_1ul67")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actionable"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_h3h1c")

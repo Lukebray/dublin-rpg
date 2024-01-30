@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal health_changed
+signal chatting
 
 @export var movement_speed : float = 50
 @export var knockback_power = 500
@@ -10,6 +11,8 @@ signal health_changed
 @onready var sprite_2d = $Sprite2D
 @onready var weapon = $Weapon as Node2D
 @onready var health_component = $HealthComponent
+@onready var direction = $Direction
+@onready var actionable_finder = $Direction/ActionableFinder
 
 
 var previous_movement_direction : Vector2
@@ -22,10 +25,13 @@ func _ready():
 	weapon.visible = false
 
 
+func _process(_delta):
+	update_animation()
+
+
 func _physics_process(_delta):
 	handle_input()
 	move_and_slide()
-	update_animation()
 
 
 func handle_input():
@@ -36,6 +42,18 @@ func handle_input():
 	
 	if Input.is_action_just_pressed("attack"):
 		update_attack_animation()
+	
+	if Input.is_action_just_pressed("action"):
+		find_actionables()
+		
+
+
+func find_actionables():
+	var actionables = actionable_finder.get_overlapping_areas()
+	if actionables.size() > 0:
+		actionables[0].action()
+	return
+
 
 func update_animation():
 	if is_attacking:
@@ -43,30 +61,44 @@ func update_animation():
 	# IDLE
 	if velocity == Vector2.ZERO:
 		if previous_movement_direction == Vector2.UP:
+			direction.rotation_degrees = 180
 			animation_player.play("idle_back")
+			
 		elif previous_movement_direction == Vector2.DOWN:
+			direction.rotation_degrees = 0
 			animation_player.play("idle_front")
+			
 		elif previous_movement_direction == Vector2.RIGHT:
 			if sprite_2d.flip_h == true:
+				direction.rotation_degrees = 270
 				sprite_2d.flip_h = false
 			animation_player.play("idle_side")
+			
 		elif previous_movement_direction == Vector2.LEFT:
 			if sprite_2d.flip_h == false:
+				direction.rotation_degrees = 90
 				sprite_2d.flip_h = true
 			animation_player.play("idle_side")
 	
 	# MOVING
 	if velocity.x < 0: # moving right
+		direction.rotation_degrees = 90
 		if sprite_2d.flip_h == false:
 			sprite_2d.flip_h = true
 		animation_player.play("walk_right") # reverse this since it's walking left
-	elif velocity.x > 0:
+		
+	elif velocity.x > 0: # moving left
+		direction.rotation_degrees = 270
 		if sprite_2d.flip_h == true:
 			sprite_2d.flip_h = false
 		animation_player.play("walk_right")
-	elif velocity.y > 0:
+		
+	elif velocity.y > 0: # moving down
+		direction.rotation_degrees = 0
 		animation_player.play("walk_down")
-	elif velocity.y < 0:
+		
+	elif velocity.y < 0: # moving up
+		direction.rotation_degrees = 180
 		animation_player.play("walk_up")
 
 

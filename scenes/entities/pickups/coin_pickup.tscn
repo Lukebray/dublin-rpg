@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://chdi8tl2552ud"]
+[gd_scene load_steps=15 format=3 uid="uid://chdi8tl2552ud"]
 
 [ext_resource type="Texture2D" uid="uid://cbhuhxd2kn3fx" path="res://art/gold_coin/goldCoin1.png" id="1_qgrwh"]
 [ext_resource type="Texture2D" uid="uid://coh841dbk0u2m" path="res://art/gold_coin/goldCoin2.png" id="2_htjse"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://clqck5eagyvou" path="res://art/gold_coin/goldCoin7.png" id="7_5450w"]
 [ext_resource type="Texture2D" uid="uid://txykwatw4jpy" path="res://art/gold_coin/goldCoin8.png" id="8_hj3or"]
 [ext_resource type="Texture2D" uid="uid://dljs6u8fjux46" path="res://art/gold_coin/goldCoin9.png" id="9_urafb"]
+[ext_resource type="PackedScene" uid="uid://dvfr7g0l0dg4u" path="res://scenes/components/actionable.tscn" id="10_bavb3"]
+[ext_resource type="Resource" uid="uid://s7b572ljdvmq" path="res://dialogues/test.dialogue" id="11_5xu0y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jf00i"]
 animations = [{
@@ -48,6 +50,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_yukxk"]
 radius = 3.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_fh1dr"]
+radius = 5.0
+
 [node name="EuroPickup" type="Area2D"]
 y_sort_enabled = true
 collision_layer = 16
@@ -62,3 +67,10 @@ frame_progress = 0.0387838
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yukxk")
+
+[node name="Actionable" parent="." instance=ExtResource("10_bavb3")]
+dialogue_resource = ExtResource("11_5xu0y")
+dialogue_start = "pickup_test"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actionable"]
+shape = SubResource("CircleShape2D_fh1dr")

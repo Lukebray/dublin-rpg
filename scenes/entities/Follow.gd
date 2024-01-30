@@ -1,4 +1,4 @@
-extends State
+extends MyState
 class_name FollowState
 
 var audio_playing : bool

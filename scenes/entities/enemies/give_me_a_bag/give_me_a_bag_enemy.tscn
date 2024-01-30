@@ -33,7 +33,7 @@ coin_node = ExtResource("2_mii63")
 movement_speed = 30.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_mo5j6")]
-max_health = 1.0
+max_health = 4.0
 
 [node name="DropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_ony8t")]
 health_component = NodePath("../HealthComponent")

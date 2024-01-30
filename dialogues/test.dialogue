@@ -1,0 +1,26 @@
+~ start
+
+if pickup_status == "has":
+	You: I have your euro.
+	- Give him the euro
+		set pickup_status = "gave"
+		You: Here you go.
+		Junkie: ahh sound pal dats deadly so it is
+	- Keep it
+		You: But I want it for myself
+		Junkie: ah here ya fuckin bastard, hope ye rot in hell
+elif pickup_status == "gave":
+	Junkie: eughghufhg deadly shi eyugghururhg
+else: 
+	Junkie: [[howiya|story bud|here mate]], have ya a euro for a hostel? sum1 stole on me. pleaaaaaassssse, get it back.
+	- Yeah alright, go on. 
+		Junkie: sound pal. c'mere to me when ye get it yeah?
+	- Get away from me ye junkies junkies bastard. 
+		Junkie: fuck ye den
+=> END
+
+~ pickup_test
+You: It's a euro...
+You: I think there was someone looking for this. 
+set pickup_status = "has"
+=> END

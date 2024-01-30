@@ -1,4 +1,4 @@
-extends State
+extends MyState
 class_name IdleState
 
 

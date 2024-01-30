@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://4p76v83dj554"]
+[gd_scene load_steps=14 format=3 uid="uid://4p76v83dj554"]
 
 [ext_resource type="PackedScene" uid="uid://npjun6tyy67s" path="res://scenes/components/health/health_container.tscn" id="1_b718l"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_gr2ww"]
@@ -1542,11 +1542,6 @@ pattern_0 = SubResource("TileMapPattern_kph2u")
 pattern_1 = SubResource("TileMapPattern_asg2c")
 pattern_2 = SubResource("TileMapPattern_6g0u5")
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ir5bb"]
-vertices = PackedVector2Array(116, 432, 116, 520, 84, 520, 84, 432)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(84, 432, 84, 520, 116, 520, 116, 432)])
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_gr2ww")
 
@@ -1625,7 +1620,3 @@ position = Vector2(47.5423, -5.94269)
 [node name="Drops" type="Node2D" parent="TileMap" groups=["drops_layer"]]
 z_index = 1
 y_sort_enabled = true
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(140, -40)
-navigation_polygon = SubResource("NavigationPolygon_ir5bb")

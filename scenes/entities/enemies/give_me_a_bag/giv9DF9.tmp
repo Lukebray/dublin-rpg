@@ -1,0 +1,234 @@
+[gd_scene load_steps=39 format=3 uid="uid://c356qio6dv8ir"]
+
+[ext_resource type="Script" path="res://scenes/entities/enemies/give_me_a_bag/give_me_a_bag_enemy.gd" id="1_gntgd"]
+[ext_resource type="PackedScene" uid="uid://p4c321o2n7ho" path="res://scenes/components/random_stream_player_2d_component.tscn" id="2_08hsj"]
+[ext_resource type="Texture2D" uid="uid://icudln6va4fy" path="res://art/give_me_a_bag_enemy/gimme_a_bag_enemy.png" id="2_djiko"]
+[ext_resource type="PackedScene" uid="uid://chdi8tl2552ud" path="res://scenes/entities/pickups/coin_pickup.tscn" id="2_mii63"]
+[ext_resource type="PackedScene" uid="uid://dq70dfgj4rbxd" path="res://scenes/components/health_component.tscn" id="2_mo5j6"]
+[ext_resource type="AudioStream" uid="uid://b5k48w2fx21gl" path="res://audio/junkie_enemy/junkie_get_out_of_my_way.wav" id="3_s0mem"]
+[ext_resource type="PackedScene" uid="uid://8wl8ws8t3lqb" path="res://scenes/components/drop_component.tscn" id="4_ony8t"]
+[ext_resource type="AudioStream" uid="uid://2lbqeq2yroml" path="res://audio/junkie_enemy/junkie_gimme_a_bag.wav" id="4_r8kdy"]
+[ext_resource type="AudioStream" uid="uid://dq3swpg2i72s4" path="res://audio/junkie_enemy/junkie_gimme_a_bag_now.wav" id="5_mt1nw"]
+[ext_resource type="Script" path="res://scenes/entities/FiniteStateMachine.gd" id="7_duys6"]
+[ext_resource type="Script" path="res://scenes/entities/Idle.gd" id="8_gex56"]
+[ext_resource type="Script" path="res://scenes/entities/Shoot.gd" id="9_5selo"]
+[ext_resource type="Script" path="res://scenes/entities/Follow.gd" id="10_q43re"]
+[ext_resource type="PackedScene" uid="uid://bwt1yu4y740qt" path="res://scenes/entities/enemies/give_me_a_bag/give_me_a_bag_enemy_projectile.tscn" id="10_s3dv3"]
+[ext_resource type="Script" path="res://scenes/entities/enemies/give_me_a_bag/Dash.gd" id="12_rl8y2"]
+[ext_resource type="PackedScene" uid="uid://byy5lcpukjnap" path="res://scenes/components/hurtbox_component.tscn" id="14_ga3n5"]
+[ext_resource type="Script" path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" id="17_5sa1o"]
+[ext_resource type="Script" path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" id="18_fwrml"]
+[ext_resource type="Script" path="res://addons/imjp94.yafsm/src/states/State.gd" id="19_rkkdo"]
+[ext_resource type="Script" path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" id="20_5qje0"]
+[ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" id="21_dixpy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1j3vs"]
+size = Vector2(7, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpx4o"]
+size = Vector2(15, 16)
+
+[sub_resource type="Resource" id="Resource_byn88"]
+script = ExtResource("19_rkkdo")
+name = "Entry"
+metadata/graph_offset = Vector2(286, 322)
+
+[sub_resource type="Resource" id="Resource_kgsxs"]
+script = ExtResource("19_rkkdo")
+name = "Idle"
+metadata/graph_offset = Vector2(446, 322)
+
+[sub_resource type="Resource" id="Resource_4086x"]
+script = ExtResource("19_rkkdo")
+name = "Shoot"
+metadata/graph_offset = Vector2(646, 322)
+
+[sub_resource type="Resource" id="Resource_baprx"]
+script = ExtResource("19_rkkdo")
+name = "Follow"
+metadata/graph_offset = Vector2(646, 162)
+
+[sub_resource type="Resource" id="Resource_5kmh1"]
+script = ExtResource("19_rkkdo")
+name = "Dash"
+metadata/graph_offset = Vector2(646, 482)
+
+[sub_resource type="Resource" id="Resource_ceu7b"]
+script = ExtResource("20_5qje0")
+from = "Entry"
+to = "Idle"
+conditions = {}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_xspgw"]
+script = ExtResource("21_dixpy")
+name = "shoot"
+
+[sub_resource type="Resource" id="Resource_jppdj"]
+script = ExtResource("20_5qje0")
+from = "Idle"
+to = "Shoot"
+conditions = {
+"shoot": SubResource("Resource_xspgw")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_6y8wg"]
+script = ExtResource("21_dixpy")
+name = "follow"
+
+[sub_resource type="Resource" id="Resource_bfixj"]
+script = ExtResource("20_5qje0")
+from = "Shoot"
+to = "Follow"
+conditions = {
+"follow": SubResource("Resource_6y8wg")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_k8dia"]
+script = ExtResource("21_dixpy")
+name = "dash"
+
+[sub_resource type="Resource" id="Resource_nnnej"]
+script = ExtResource("20_5qje0")
+from = "Shoot"
+to = "Dash"
+conditions = {
+"dash": SubResource("Resource_k8dia")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_7dk0s"]
+script = ExtResource("20_5qje0")
+from = "Follow"
+to = "Shoot"
+conditions = {}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_hdcll"]
+script = ExtResource("20_5qje0")
+from = "Dash"
+to = "Shoot"
+conditions = {}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_gtqdy"]
+script = ExtResource("18_fwrml")
+states = {
+"Dash": SubResource("Resource_5kmh1"),
+"Entry": SubResource("Resource_byn88"),
+"Follow": SubResource("Resource_baprx"),
+"Idle": SubResource("Resource_kgsxs"),
+"Shoot": SubResource("Resource_4086x")
+}
+transitions = {
+"Dash": {
+"Shoot": SubResource("Resource_hdcll")
+},
+"Entry": {
+"Idle": SubResource("Resource_ceu7b")
+},
+"Follow": {
+"Shoot": SubResource("Resource_7dk0s")
+},
+"Idle": {
+"Shoot": SubResource("Resource_jppdj")
+},
+"Shoot": {
+"Dash": SubResource("Resource_nnnej"),
+"Follow": SubResource("Resource_bfixj")
+}
+}
+name = ""
+
+[node name="GiveMeABagEnemy" type="CharacterBody2D" groups=["enemy"]]
+y_sort_enabled = true
+collision_layer = 8
+collision_mask = 14
+motion_mode = 1
+script = ExtResource("1_gntgd")
+coin_node = ExtResource("2_mii63")
+movement_speed = 30.0
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_mo5j6")]
+max_health = 1.0
+
+[node name="DropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_ony8t")]
+health_component = NodePath("../HealthComponent")
+drop_item_scene = ExtResource("2_mii63")
+
+[node name="RandomStreamPlayer2DComponent" parent="." instance=ExtResource("2_08hsj")]
+volume_db = -10.0
+streams = Array[AudioStream]([ExtResource("3_s0mem"), ExtResource("4_r8kdy"), ExtResource("5_mt1nw")])
+randomise_pitch = false
+
+[node name="Debug" type="Label" parent="."]
+offset_left = -6.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 2.0
+scale = Vector2(0.37004, 0.339794)
+text = "test"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(100, 0)
+offset_left = -9.0
+offset_top = -23.0
+offset_right = 91.0
+offset_bottom = 4.0
+scale = Vector2(0.182417, 0.182417)
+max_value = 1.0
+value = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_djiko")
+
+[node name="FiniteStateMachine" type="Node2D" parent="."]
+script = ExtResource("7_duys6")
+
+[node name="Idle" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("8_gex56")
+
+[node name="Shoot" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("9_5selo")
+projectile_node = ExtResource("10_s3dv3")
+
+[node name="Timer" type="Timer" parent="FiniteStateMachine/Shoot"]
+
+[node name="Follow" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("10_q43re")
+
+[node name="Dash" type="Node2D" parent="FiniteStateMachine"]
+script = ExtResource("12_rl8y2")
+
+[node name="Timer" type="Timer" parent="FiniteStateMachine/Dash"]
+
+[node name="PlayerDetectionRay" type="RayCast2D" parent="."]
+position = Vector2(0, -8)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_1j3vs")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("14_ga3n5")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(-0.5, -8)
+shape = SubResource("RectangleShape2D_dpx4o")
+
+[node name="StateMachinePlayer" type="Node" parent="."]
+script = ExtResource("17_5sa1o")
+state_machine = SubResource("Resource_gtqdy")
+
+[connection signal="died" from="HealthComponent" to="DropComponent" method="_on_health_component_died"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="timeout" from="FiniteStateMachine/Shoot/Timer" to="FiniteStateMachine/Shoot" method="_on_timer_timeout"]
+[connection signal="timeout" from="FiniteStateMachine/Dash/Timer" to="FiniteStateMachine/Dash" method="_on_timer_timeout"]
+[connection signal="updated" from="StateMachinePlayer" to="." method="_on_state_machine_player_updated"]
